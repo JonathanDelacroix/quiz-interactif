@@ -19,6 +19,10 @@ import {
 } from "./recap.js"
 
 import { questions } from "./Questions.js";
+import { generateStatistics } from "./stats.js";
+
+export { questions, score};
+
 
 console.log("Quiz JS loaded...");
 
@@ -149,6 +153,7 @@ function endQuiz() {
   setText(bestScoreEnd, bestScore);
   let recap = getAnswerQuestion(questionsfilled);
   startrecap(recap, recapsection, answersgiven);
+  generateStatistics();
 }
 
 function restartQuiz() {
@@ -170,8 +175,8 @@ function startrecap(recap, recapsection, answersgiven) {
   recapsection.style.display = "flex";
 
   questionsfilled.forEach((question, idx) => {
-    const userAnswerIndex = answersgiven[idx]; // Index of the answer the user chose
-    const correctAnswerIndex = question.correct; // Index of the correct answer
+    const userAnswerIndex = answersgiven[idx];
+    const correctAnswerIndex = question.correct; 
 
     const userAnswerText = question.answers[userAnswerIndex];
     const correctAnswerText = question.answers[correctAnswerIndex];
@@ -179,13 +184,13 @@ function startrecap(recap, recapsection, answersgiven) {
     const span = document.createElement("span");
     span.classList.add("recap-question");
 
-    // Apply correct/incorrect styling based on index comparison
+    
     if (userAnswerIndex === correctAnswerIndex) {
-      span.style.backgroundColor = "#2e7d32"; // Green for correct
-      span.style.color = "#ffffff"; // White text for better readability
+      span.style.backgroundColor = "#2e7d32"; 
+      span.style.color = "#ffffff"; 
     } else {
-      span.style.backgroundColor = "#d32f2f"; // Red for incorrect
-      span.style.color = "#ffffff"; // White text for better readability
+      span.style.backgroundColor = "#d32f2f"; 
+      span.style.color = "#ffffff"; 
     }
 
     span.innerHTML = `
