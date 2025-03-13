@@ -132,6 +132,7 @@ function lockAnswers() {
   });
 }
 
+
 function nextQuestion() {
   currentQuestionIndex++;
   if (currentQuestionIndex < questions.length) {
