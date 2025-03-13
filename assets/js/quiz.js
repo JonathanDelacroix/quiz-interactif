@@ -14,6 +14,9 @@ import {
   saveToLocalStorage,
   startTimer,
 } from "./utils.js";
+import {
+  getAnswerQuestion
+} from "./recap.js"
 
 import { questions } from "./Questions.js";
 
@@ -25,6 +28,8 @@ let currentQuestionIndex = 0;
 let score = 0;
 let bestScore = loadFromLocalStorage("bestScore", 0);
 let timerId = null;
+let questionsfilled = [];
+let answersgiven = [];
 
 // DOM Elements
 const introScreen = getElement("#intro-screen");
@@ -45,6 +50,7 @@ const timeLeftSpan = getElement("#time-left");
 
 const currentQuestionIndexSpan = getElement("#current-question-index");
 const totalQuestionsSpan = getElement("#total-questions");
+const recapsection = getElement("#recap-questions")
 
 // Init
 startBtn.addEventListener("click", startQuiz);
@@ -59,6 +65,7 @@ function startQuiz() {
 
   currentQuestionIndex = 0;
   score = 0;
+  questionsfilled = []
 
   setText(totalQuestionsSpan, questions.length);
 
@@ -113,7 +120,8 @@ function selectAnswer(index, btn) {
   } else {
     btn.classList.add("wrong");
   }
-
+  answersgiven.push(index);
+  questionsfilled.push({ ...q });
   markCorrectAnswer(answersDiv, q.correct);
   lockAnswers(answersDiv);
   nextBtn.classList.remove("hidden");
@@ -139,11 +147,53 @@ function endQuiz() {
     saveToLocalStorage("bestScore", bestScore);
   }
   setText(bestScoreEnd, bestScore);
+  let recap = getAnswerQuestion(questionsfilled);
+  startrecap(recap, recapsection, answersgiven);
 }
 
 function restartQuiz() {
   hideElement(resultScreen);
   showElement(introScreen);
 
+  answersgiven = [];
+  questionsfilled = [];
+
+  recapsection.innerHTML = "";
+  recapsection.style.display = "none";
+
   setText(bestScoreValue, bestScore);
+}
+
+
+function startrecap(recap, recapsection, answersgiven) {
+  recapsection.innerHTML = "";
+  recapsection.style.display = "flex";
+
+  questionsfilled.forEach((question, idx) => {
+    const userAnswerIndex = answersgiven[idx]; // Index of the answer the user chose
+    const correctAnswerIndex = question.correct; // Index of the correct answer
+
+    const userAnswerText = question.answers[userAnswerIndex];
+    const correctAnswerText = question.answers[correctAnswerIndex];
+
+    const span = document.createElement("span");
+    span.classList.add("recap-question");
+
+    // Apply correct/incorrect styling based on index comparison
+    if (userAnswerIndex === correctAnswerIndex) {
+      span.style.backgroundColor = "#2e7d32"; // Green for correct
+      span.style.color = "#ffffff"; // White text for better readability
+    } else {
+      span.style.backgroundColor = "#d32f2f"; // Red for incorrect
+      span.style.color = "#ffffff"; // White text for better readability
+    }
+
+    span.innerHTML = `
+      <span class="title-question">${question.text}</span>
+      <span class="answer-question">Your answer: ${userAnswerText}</span>
+      <span class="correct-answer">(Correct: ${correctAnswerText})</span>
+    `;
+
+    recapsection.appendChild(span);
+  });
 }

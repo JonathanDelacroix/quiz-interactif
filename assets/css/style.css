@@ -1,3 +1,69 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+/* http://meyerweb.com/eric/tools/css/reset/
+	v2.0 | 20110126
+	License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   margin: 20px;
@@ -28,7 +94,7 @@ button {
 }
 
 button:hover {
-  background-color: #1565c0;
+  background-color: red;
 }
 
 .hidden {
@@ -89,3 +155,32 @@ button:hover {
   font-size: 1.2em;
   margin-bottom: 10px;
 }
+
+#recap-questions {
+  margin-top: 20px;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.recap-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20%;
+  border: #455a64 solid 1px;
+}
+
+.title-question, .answer-question {
+  vertical-align: center;
+  flex-wrap: wrap;
+}
+
+.title-question {
+  width: 60%;
+}
+
+.answer-question {
+  width: 30%;
+}
+
+/*# sourceMappingURL=style.css.map */
