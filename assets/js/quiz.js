@@ -65,14 +65,25 @@ function startQuiz() {
   showQuestion();
 }
 
+function shuffleArray(array) {
+  return array.sort(() => Math.random() - 0.5);
+}
+
 function showQuestion() {
   clearInterval(timerId);
 
-  const q = questions[currentQuestionIndex];
+  
+  if (!window.shuffledQuestions) {
+    window.shuffledQuestions = shuffleArray([...questions]);
+  }
+
+  const q = window.shuffledQuestions[currentQuestionIndex]; 
   setText(questionText, q.text);
   setText(currentQuestionIndexSpan, currentQuestionIndex + 1);
 
   answersDiv.innerHTML = "";
+  
+  
   q.answers.forEach((answer, index) => {
     const btn = createAnswerButton(answer, () => selectAnswer(index, btn));
     answersDiv.appendChild(btn);
@@ -90,6 +101,7 @@ function showQuestion() {
     }
   );
 }
+
 
 function selectAnswer(index, btn) {
   clearInterval(timerId);

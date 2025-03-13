@@ -1,4 +1,4 @@
-import { questions } from "./Questions.js"; 
+import { questions } from "./assets/js/Questions.js"; 
 
 console.log("Quiz JS loaded...");
 
