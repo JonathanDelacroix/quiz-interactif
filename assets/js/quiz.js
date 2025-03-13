@@ -14,6 +14,9 @@ import {
   saveToLocalStorage,
   startTimer,
 } from "./utils.js";
+import {
+  getAnswerQuestion
+} from "./recap.js"
 
 console.log("Quiz JS loaded...");
 
@@ -36,6 +39,7 @@ let currentQuestionIndex = 0;
 let score = 0;
 let bestScore = loadFromLocalStorage("bestScore", 0);
 let timerId = null;
+let questionsfilled = [];
 
 // DOM Elements
 const introScreen = getElement("#intro-screen");
@@ -56,6 +60,7 @@ const timeLeftSpan = getElement("#time-left");
 
 const currentQuestionIndexSpan = getElement("#current-question-index");
 const totalQuestionsSpan = getElement("#total-questions");
+const recapsection = getElement("#recap-questions")
 
 // Init
 startBtn.addEventListener("click", startQuiz);
@@ -70,6 +75,7 @@ function startQuiz() {
 
   currentQuestionIndex = 0;
   score = 0;
+  questionsfilled = []
 
   setText(totalQuestionsSpan, questions.length);
 
@@ -112,7 +118,7 @@ function selectAnswer(index, btn) {
   } else {
     btn.classList.add("wrong");
   }
-
+  questionsfilled.push({ ...q });
   markCorrectAnswer(answersDiv, q.correct);
   lockAnswers(answersDiv);
   nextBtn.classList.remove("hidden");
@@ -138,6 +144,8 @@ function endQuiz() {
     saveToLocalStorage("bestScore", bestScore);
   }
   setText(bestScoreEnd, bestScore);
+  let recap = getAnswerQuestion(questionsfilled);
+  startrecap(recap, recapsection);
 }
 
 function restartQuiz() {
@@ -145,4 +153,17 @@ function restartQuiz() {
   showElement(introScreen);
 
   setText(bestScoreValue, bestScore);
+}
+
+function startrecap(recap, recapsection) {
+  recapsection.innerHTML = "";
+
+  Object.entries(recap).forEach(([question, answer]) => {
+      const span = document.createElement("span");
+      span.classList.add("recap-question");
+      span.innerHTML = `<span class="title-question">${question}</span><span class="answer-question">${answer}</span>`;
+      recapsection.appendChild(span);
+  });
+
+  recapsection.style.display = "flex";
 }

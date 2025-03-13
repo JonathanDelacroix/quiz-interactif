@@ -89,3 +89,31 @@ button:hover {
   font-size: 1.2em;
   margin-bottom: 10px;
 }
+
+#recap-questions {
+  margin-top: 20px;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.recap-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap : 20%;
+  border: #455a64 solid 1px;
+}
+
+.title-question, .answer-question {
+  vertical-align: center;
+  flex-wrap: wrap;
+}
+
+.title-question {
+  color : #2e7d32;
+  width: 60%;
+}
+
+.answer-question {
+  width: 30%;
+}
