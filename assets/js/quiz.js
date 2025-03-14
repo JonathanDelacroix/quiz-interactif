@@ -31,7 +31,6 @@ let timerId = null;
 let questionsfilled = [];
 let answersgiven = [];
 
-// DOM Elements
 const introScreen = getElement("#intro-screen");
 const questionScreen = getElement("#question-screen");
 const resultScreen = getElement("#result-screen");
@@ -91,17 +90,20 @@ function showQuestion() {
   }
 
   const q = window.shuffledQuestions[currentQuestionIndex]; 
-  const correctAnswer = q.correct;
-  const answers = [...q.answers];
-  const shuffledAnswers = shuffleArray(answers);
+  const correctAnswerIndex = q.correct; 
+  const answers = q.answers;
+
+  const answersWithIndex = answers.map((answer, index) => ({ index, answer }));
+  const shuffledAnswersWithIndex = shuffleArray([...answersWithIndex]);
 
   setText(questionText, q.text);
   setText(currentQuestionIndexSpan, currentQuestionIndex + 1);
 
   answersDiv.innerHTML = "";
 
-  shuffledAnswers.forEach((answer, index) => {
-    const btn = createAnswerButton(answer, () => selectAnswer(index, btn));
+  shuffledAnswersWithIndex.forEach(({ index, answer }) => {
+    const btn = createAnswerButton(answer, () => selectAnswer(index, q, btn));
+    btn.dataset.index = index;
     answersDiv.appendChild(btn);
   });
 
@@ -116,13 +118,10 @@ function showQuestion() {
       nextBtn.classList.remove("hidden");
     }
   );
-  q.correct = shuffledAnswers.indexOf(q.answers[correctAnswer]);
 }
 
-function selectAnswer(index, btn) {
+function selectAnswer(index, q, btn) {
   clearInterval(timerId);
-
-  const q = questions[currentQuestionIndex];
   if (index === q.correct) {
     score++;
     btn.classList.add("correct");
