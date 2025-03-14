@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mode Contre la Montre</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <!-- Écran d'introduction -->
+  <div id="intro-screen">
+    <h1>Mode Contre la Montre</h1>
+    <p>Répondez à un maximum de questions en 20 secondes !</p>
+    <button id="start-btn">Commencer</button>
+  </div>
+
+  <!-- Écran des questions -->
+  <div id="question-screen" class="hidden">
+    <div id="header">
+      <span>Temps restant : <span id="time-left"></span> sec</span>
+      <span>Score : <span id="score-text">0</span></span>
+    </div>
+    <div id="question-container">
+      <p id="question-text"></p>
+      <div id="answers"></div>
+    </div>
+  </div>
+
+  <!-- Écran des résultats -->
+  <div id="result-screen" class="hidden">
+    <h2>Résultats</h2>
+    <p id="score-text-result"></p>
+    <div id="statsContainer"></div>
+    <button id="restart-btn">Recommencer</button>
+    <a href="./index.html"><button>Retour</button></a>
+  </div>
+
+  <script type="module" src="../assets/js/quizMontre.js"></script>
+</body>
+</html>
