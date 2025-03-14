@@ -22,7 +22,10 @@ export const lockAnswers = (container) => {
 
 export const markCorrectAnswer = (container, correctIndex) => {
   const buttons = container.querySelectorAll("button");
-  if (buttons[correctIndex]) {
-    buttons[correctIndex].classList.add("correct");
-  }
+
+  buttons.forEach((btn) => {
+    if (parseInt(btn.dataset.index) === correctIndex) {
+      btn.classList.add("correct");
+    }
+  });
 };

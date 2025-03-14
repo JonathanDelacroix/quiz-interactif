@@ -36,7 +36,6 @@ let timerId = null;
 let questionsfilled = [];
 let answersgiven = [];
 
-// DOM Elements
 const introScreen = getElement("#intro-screen");
 const questionScreen = getElement("#question-screen");
 const resultScreen = getElement("#result-screen");
@@ -78,26 +77,39 @@ function startQuiz() {
 }
 
 function shuffleArray(array) {
-  return array.sort(() => Math.random() - 0.5);
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }
 
 function showQuestion() {
   clearInterval(timerId);
 
   currentQuestionStartTime = Date.now();
+
   if (!window.shuffledQuestions) {
-    window.shuffledQuestions = shuffleArray([...questions]);
+    const level1 = shuffleArray(questions.filter(q => q.level === 1));
+    const level2 = shuffleArray(questions.filter(q => q.level === 2));
+    const level3 = shuffleArray(questions.filter(q => q.level === 3));
+    window.shuffledQuestions = [...level1, ...level2, ...level3];
   }
 
   const q = window.shuffledQuestions[currentQuestionIndex]; 
+  const answers = q.answers;
+
+  const answersWithIndex = answers.map((answer, index) => ({ index, answer }));
+  const shuffledAnswersWithIndex = shuffleArray([...answersWithIndex]);
+
   setText(questionText, q.text);
   setText(currentQuestionIndexSpan, currentQuestionIndex + 1);
 
   answersDiv.innerHTML = "";
-  
-  
-  q.answers.forEach((answer, index) => {
-    const btn = createAnswerButton(answer, () => selectAnswer(index, btn));
+
+  shuffledAnswersWithIndex.forEach(({ index, answer }) => {
+    const btn = createAnswerButton(answer, () => selectAnswer(index, q, btn));
+    btn.dataset.index = index;
     answersDiv.appendChild(btn);
   });
 
@@ -118,8 +130,7 @@ function showQuestion() {
   );
 }
 
-
-function selectAnswer(index, btn) {
+function selectAnswer(index, q, btn) {
   clearInterval(timerId);
 
 
@@ -196,17 +207,15 @@ function startrecap(recap, recapsection, answersgiven) {
 
     
     if (userAnswerIndex === correctAnswerIndex) {
-      span.style.backgroundColor = "#2e7d32"; 
-      span.style.color = "#ffffff"; 
+      span.style.color = "#2e7d32";
     } else {
-      span.style.backgroundColor = "#d32f2f"; 
-      span.style.color = "#ffffff"; 
+      span.style.color = "#d32f2f";
     }
 
     span.innerHTML = `
       <span class="title-question">${question.text}</span>
-      <span class="answer-question">Your answer: ${userAnswerText}</span>
-      <span class="correct-answer">(Correct: ${correctAnswerText})</span>
+      <span class="answer-question">Votre réponse : ${userAnswerText}</span>
+      <span class="correct-answer">Solution : ${correctAnswerText}</span>
     `;
 
     recapsection.appendChild(span);
