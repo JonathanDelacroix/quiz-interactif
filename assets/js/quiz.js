@@ -192,17 +192,15 @@ function startrecap(recap, recapsection, answersgiven) {
 
     
     if (userAnswerIndex === correctAnswerIndex) {
-      span.style.backgroundColor = "#2e7d32"; 
-      span.style.color = "#ffffff"; 
+      span.style.color = "#2e7d32";
     } else {
-      span.style.backgroundColor = "#d32f2f"; 
-      span.style.color = "#ffffff"; 
+      span.style.color = "#d32f2f";
     }
 
     span.innerHTML = `
       <span class="title-question">${question.text}</span>
-      <span class="answer-question">Réponse donnée : ${userAnswerText}</span>
-      <span class="correct-answer">Réponse correcte : ${correctAnswerText}</span>
+      <span class="answer-question">Votre réponse : ${userAnswerText}</span>
+      <span class="correct-answer">Solution : ${correctAnswerText}</span>
     `;
 
     recapsection.appendChild(span);

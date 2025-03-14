@@ -2,38 +2,98 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap');
 
 body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    margin: 20px;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    background: #fafafa;
-    color: #333;
+    color: #fff;
+    background: url('https://cdn.pixabay.com/photo/2020/03/19/18/29/camel-4948299_1280.jpg') no-repeat center center/cover;
+    position: relative;
+}
+
+.quiz-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    max-width: 400px;
+    width: 90%;
+    animation: fadeIn 0.8s ease-in-out;
 }
 
 h1 {
-    margin-bottom: 25px;
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: linear-gradient(45deg, #ff00ff, #ffcc00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 15px;
 }
 
-.notice {
+p {
+    font-size: 18px;
     font-style: italic;
-    margin-bottom: 15px;
-    color: #555;
+    opacity: 0.9;
+}
+
+.score {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #ffeb3b;
+    text-shadow: 0 0 8px rgba(255, 235, 59, 0.8);
 }
 
 button {
-    margin: 10px auto;
-    padding: 10px 20px;
-    cursor: pointer;
-    background-color: #1976d2;
-    color: #fff;
+    background: linear-gradient(45deg, #ff0080, #ff4f00);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 14px 24px;
     border: none;
-    border-radius: 6px;
-    transition: background-color 0.3s;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 0 15px rgba(255, 0, 128, 0.5);
+    text-transform: uppercase;
 }
 
 button:hover {
-    background-color: red;
+    transform: scale(1.1);
+    background: linear-gradient(45deg, #ff4f00, #ff0080);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+}
+
+#timer-div {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #ffeb3b;
+}
+
+#answers {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#answers button {
+    width: 100%;
+    background: #4caf50;
+    transition: background 0.3s;
+}
+
+#answers button:hover {
+    background: #388e3c;
 }
 
 .hidden {
@@ -49,6 +109,7 @@ button:hover {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: black;
 }
 
 #answers button {
@@ -86,8 +147,12 @@ button:hover {
 }
 
 #result-screen h2 {
+    font-size: 2em;
     margin-bottom: 20px;
-    color: #2e7d32; /* vert foncé */
+}
+
+#result-screen {
+    overflow-y: scroll;
 }
 
 #score-text {
@@ -96,28 +161,38 @@ button:hover {
 }
 
 #recap-questions {
-    margin-top: 20px;
+    margin: 20px 0 20px 0;
     flex-direction: column;
     gap: 20px;
-  }
-  
+}
+
 .recap-question {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap : 20%;
-    border: #455a64 solid 1px;
-  }
-  
+    gap : 5%;
+}
+
 .title-question, .answer-question {
     vertical-align: center;
     flex-wrap: wrap;
-  }
-  
+}
+
 .title-question {
     width: 60%;
-  }
-  
+}
+
 .answer-question {
     width: 30%;
-  }
+}
+
+#question-text {
+    color: black;
+    margin: 15px;
+}
+
+#next-btn {
+    margin : 15px;
+}
+
+#start-btn {
+    margin : 15px;
+}
