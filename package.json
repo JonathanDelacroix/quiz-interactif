@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@translate-tools/core": "^2.0.1",
     "node-fetch": "^3.3.2"
   }
 }
