@@ -241,19 +241,17 @@ import { generateStatistics } from "./statsTheme.js";
   
       const span = document.createElement("span");
       span.classList.add("recap-question");
-  
+
       if (userAnswerIndex === correctAnswerIndex) {
-        span.style.backgroundColor = "#2e7d32"; 
-        span.style.color = "#ffffff"; 
+        span.style.color = "#2e7d32";
       } else {
-        span.style.backgroundColor = "#d32f2f"; 
-        span.style.color = "#ffffff"; 
+        span.style.color = "#d32f2f";
       }
   
       span.innerHTML = `
         <span class="title-question">${question.text}</span>
-        <span class="answer-question">Votre réponse: ${userAnswerText}</span>
-        <span class="correct-answer">(Correct: ${correctAnswerText})</span>
+        <span class="answer-question">Votre réponse : ${userAnswerText}</span>
+        <span class="correct-answer">Solution : ${correctAnswerText}</span>
       `;
   
       recapsection.appendChild(span);
