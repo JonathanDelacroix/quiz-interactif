@@ -97,7 +97,7 @@ import { generateStatistics } from "./statsTheme.js";
     backButton.classList.add("back-btn");
     backButton.textContent = "Retour";
     backButton.addEventListener("click", () => {
-      window.location.href = "index.html";
+      window.location.href = "../index.html";
     });
     
     themeButtons.appendChild(backButton);
