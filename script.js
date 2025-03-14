@@ -146,8 +146,7 @@ function endQuiz() {
   questionScreen.style.display = "none";
   resultScreen.style.display = "block";
 
-  scoreText.textContent = `Votre score : ${score} / ${questions.length}`;
-
+  
   if (score > bestScore) {
     bestScore = score;
     saveBestScore();

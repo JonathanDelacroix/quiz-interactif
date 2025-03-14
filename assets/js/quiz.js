@@ -20,13 +20,11 @@ import {
 
 import { questions } from "./Questions.js";
 import { generateStatistics } from "./stats.js";
+import { changeLanguage, savedLanguage } from "./language.js";
 
 export { questions, score};
 
-
 console.log("Quiz JS loaded...");
-
-
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -56,6 +54,7 @@ const totalQuestionsSpan = getElement("#total-questions");
 const recapsection = getElement("#recap-questions")
 
 // Init
+changeLanguage(savedLanguage);
 startBtn.addEventListener("click", startQuiz);
 nextBtn.addEventListener("click", nextQuestion);
 restartBtn.addEventListener("click", restartQuiz);
@@ -70,8 +69,7 @@ function startQuiz() {
   score = 0;
   questionsfilled = []
 
-  setText(totalQuestionsSpan, questions.length);
-
+  setText(totalQuestionsSpan, Object.keys(questions).length);
   showQuestion();
 }
 
@@ -87,34 +85,39 @@ function showQuestion() {
   clearInterval(timerId);
 
   if (!window.shuffledQuestions) {
-    const level1 = shuffleArray(questions.filter(q => q.level === 1));
-    const level2 = shuffleArray(questions.filter(q => q.level === 2));
-    const level3 = shuffleArray(questions.filter(q => q.level === 3));
+    const allQuestions = Object.values(questions);
+    const level1 = shuffleArray(allQuestions.filter(q => q.level === 1));
+    const level2 = shuffleArray(allQuestions.filter(q => q.level === 2));
+    const level3 = shuffleArray(allQuestions.filter(q => q.level === 3));
+
     window.shuffledQuestions = [...level1, ...level2, ...level3];
   }
 
+  prompt(JSON.stringify(window.shuffledQuestions, null, 2));
   const q = window.shuffledQuestions[currentQuestionIndex]; 
-  const answers = q.answers;
 
+  const translatedQuestion = q[savedLanguage];
+
+  const answers = translatedQuestion.answers;
   const answersWithIndex = answers.map((answer, index) => ({ index, answer }));
   const shuffledAnswersWithIndex = shuffleArray([...answersWithIndex]);
 
-  setText(questionText, q.text);
+  setText(questionText, translatedQuestion.text);
   setText(currentQuestionIndexSpan, currentQuestionIndex + 1);
 
   answersDiv.innerHTML = "";
 
   shuffledAnswersWithIndex.forEach(({ index, answer }) => {
-    const btn = createAnswerButton(answer, () => selectAnswer(index, q, btn));
+    const btn = createAnswerButton(answer, () => selectAnswer(index, translatedQuestion, btn));
     btn.dataset.index = index;
     answersDiv.appendChild(btn);
   });
 
   nextBtn.classList.add("hidden");
 
-  timeLeftSpan.textContent = q.timeLimit;
+  timeLeftSpan.textContent = translatedQuestion.timeLimit;
   timerId = startTimer(
-    q.timeLimit,
+    translatedQuestion.timeLimit,
     (timeLeft) => setText(timeLeftSpan, timeLeft),
     () => {
       lockAnswers(answersDiv);
@@ -151,7 +154,7 @@ function endQuiz() {
   hideElement(questionScreen);
   showElement(resultScreen);
 
-  updateScoreDisplay(scoreText, score, questions.length);
+  updateScoreDisplay(scoreText, score, questions.length, savedLanguage);
 
   if (score > bestScore) {
     bestScore = score;
@@ -202,8 +205,8 @@ function startrecap(recap, recapsection, answersgiven) {
 
     span.innerHTML = `
       <span class="title-question">${question.text}</span>
-      <span class="answer-question">Your answer: ${userAnswerText}</span>
-      <span class="correct-answer">(Correct: ${correctAnswerText})</span>
+      <span class="answer-question">Réponse donnée : ${userAnswerText}</span>
+      <span class="correct-answer">Réponse correcte : ${correctAnswerText}</span>
     `;
 
     recapsection.appendChild(span);

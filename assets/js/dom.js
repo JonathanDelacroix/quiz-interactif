@@ -11,8 +11,17 @@ export const createAnswerButton = (text, onClick) => {
   return btn;
 };
 
-export const updateScoreDisplay = (scoreElement, score, total) => {
-  scoreElement.textContent = `Votre score : ${score} / ${total}`;
+export const updateScoreDisplay = (scoreElement, score, total, lang) => {
+  const scoreText = {
+    fr: "Votre score",
+    en: "Your score",
+    ar: "نتيجتك",
+    de: "Dein Ergebnis",
+    es: "Tu puntuación",
+  };
+
+  const scoreLabel = scoreText[lang] || scoreText["fr"];
+  scoreElement.textContent = `${scoreLabel} : ${score} / ${total}`;
 };
 
 export const lockAnswers = (container) => {

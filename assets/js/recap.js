@@ -1,7 +1,8 @@
 export const getAnswerQuestion = (questions) => {
     let answers = {};
     
-    questions.forEach(question => {
+    // Iterate over the questions object keys
+    Object.values(questions).forEach(question => {
         const answer = question.answers[question.correct]; 
         answers[question.text] = answer;
     });
