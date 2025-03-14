@@ -19,6 +19,10 @@ import {
 } from "./recap.js"
 
 import { questions } from "./Questions.js";
+import { generateStatistics } from "./stats.js";
+
+export { questions, score};
+
 
 console.log("Quiz JS loaded...");
 
@@ -31,7 +35,6 @@ let timerId = null;
 let questionsfilled = [];
 let answersgiven = [];
 
-// DOM Elements
 const introScreen = getElement("#intro-screen");
 const questionScreen = getElement("#question-screen");
 const resultScreen = getElement("#result-screen");
@@ -73,26 +76,37 @@ function startQuiz() {
 }
 
 function shuffleArray(array) {
-  return array.sort(() => Math.random() - 0.5);
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }
 
 function showQuestion() {
   clearInterval(timerId);
 
-  
   if (!window.shuffledQuestions) {
-    window.shuffledQuestions = shuffleArray([...questions]);
+    const level1 = shuffleArray(questions.filter(q => q.level === 1));
+    const level2 = shuffleArray(questions.filter(q => q.level === 2));
+    const level3 = shuffleArray(questions.filter(q => q.level === 3));
+    window.shuffledQuestions = [...level1, ...level2, ...level3];
   }
 
   const q = window.shuffledQuestions[currentQuestionIndex]; 
+  const answers = q.answers;
+
+  const answersWithIndex = answers.map((answer, index) => ({ index, answer }));
+  const shuffledAnswersWithIndex = shuffleArray([...answersWithIndex]);
+
   setText(questionText, q.text);
   setText(currentQuestionIndexSpan, currentQuestionIndex + 1);
 
   answersDiv.innerHTML = "";
-  
-  
-  q.answers.forEach((answer, index) => {
-    const btn = createAnswerButton(answer, () => selectAnswer(index, btn));
+
+  shuffledAnswersWithIndex.forEach(({ index, answer }) => {
+    const btn = createAnswerButton(answer, () => selectAnswer(index, q, btn));
+    btn.dataset.index = index;
     answersDiv.appendChild(btn);
   });
 
@@ -109,11 +123,8 @@ function showQuestion() {
   );
 }
 
-
-function selectAnswer(index, btn) {
+function selectAnswer(index, q, btn) {
   clearInterval(timerId);
-
-  const q = questions[currentQuestionIndex];
   if (index === q.correct) {
     score++;
     btn.classList.add("correct");
@@ -149,6 +160,7 @@ function endQuiz() {
   setText(bestScoreEnd, bestScore);
   let recap = getAnswerQuestion(questionsfilled);
   startrecap(recap, recapsection, answersgiven);
+  generateStatistics();
 }
 
 function restartQuiz() {
@@ -170,8 +182,8 @@ function startrecap(recap, recapsection, answersgiven) {
   recapsection.style.display = "flex";
 
   questionsfilled.forEach((question, idx) => {
-    const userAnswerIndex = answersgiven[idx]; // Index of the answer the user chose
-    const correctAnswerIndex = question.correct; // Index of the correct answer
+    const userAnswerIndex = answersgiven[idx];
+    const correctAnswerIndex = question.correct; 
 
     const userAnswerText = question.answers[userAnswerIndex];
     const correctAnswerText = question.answers[correctAnswerIndex];
@@ -179,11 +191,11 @@ function startrecap(recap, recapsection, answersgiven) {
     const span = document.createElement("span");
     span.classList.add("recap-question");
 
-    // Apply correct/incorrect styling based on index comparison
+    
     if (userAnswerIndex === correctAnswerIndex) {
-      span.style.color = "#2e7d32"; // White text for better readability
+      span.style.color = "#2e7d32";
     } else {
-      span.style.color = "#d32f2f"; // White text for better readability
+      span.style.color = "#d32f2f";
     }
 
     span.innerHTML = `
