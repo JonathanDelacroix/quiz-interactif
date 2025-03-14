@@ -11,7 +11,12 @@
         <h1>Choisissez un thème</h1>
         <div id="theme-buttons"></div>
     </div>
-
+    <div class="switch-container">
+        <input type="checkbox" id="switch" class="switch-input">
+        <label for="switch" class="switch-label">
+            <span class="switch-handle"></span>
+        </label>
+    </div>
     <div id="question-screen" style="display: none">
         <div id="progress">
             Question <span id="current-question-index"></span> /
@@ -33,6 +38,7 @@
     </div>
 
     <script type="module" src="../assets/js/quizTheme.js"></script>
+    <script src="../assets/js/darkMode.js"></script>
 
 </body>
 </html>

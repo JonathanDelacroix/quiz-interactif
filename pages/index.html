@@ -1,46 +1,49 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <title>Quiz Dynamique</title>
     <link rel="stylesheet" href="../assets/css/style.css" />
-  </head>
-  <body>
+</head>
+<body>
     <h1>Quiz Dynamique</h1>
-
+    <div class="switch-container">
+        <input type="checkbox" id="switch" class="switch-input">
+        <label for="switch" class="switch-label">
+            <span class="switch-handle"></span>
+        </label>
+    </div>
     <div id="intro-screen">
-      <p class="notice">
-        Testez vos connaissances en quelques questions chronométrées !
-      </p>
-      <p>Meilleur score : <span id="best-score-value">0</span></p>
-      <button id="start-btn">🎮 Commencer le quiz 🎮</button>
-      <button id="theme-quiz-btn"><a href="/pages/themes.html">Mode Thème</a></button>
+        <p class="notice">
+            Testez vos connaissances en quelques questions chronométrées !
+        </p>
+        <p>Meilleur score : <span id="best-score-value">0</span></p>
+        <button id="start-btn">🎮 Commencer le quiz 🎮</button>
+        <button id="theme-quiz-btn"><a href="/pages/themes.html">Mode Thème</a></button>
     </div>
 
     <div id="question-screen" style="display: none">
-      <div id="progress">
-        Question <span id="current-question-index"></span> /
-        <span id="total-questions"></span>
-      </div>
-      <p id="question-text"></p>
-      <div id="answers"></div>
-      <div id="timer-div">Temps restant : <span id="time-left">0</span>s</div>
-      <button id="next-btn" class="hidden">Question suivante</button>
+        <div id="progress">
+            Question <span id="current-question-index"></span> /
+            <span id="total-questions"></span>
+        </div>
+        <p id="question-text"></p>
+        <div id="answers"></div>
+        <div id="timer-div">Temps restant : <span id="time-left">0</span>s</div>
+        <button id="next-btn" class="hidden">Question suivante</button>
     </div>
-    
 
     <div id="result-screen" style="display: none">
-      <h2>Résultat final</h2>
-      <p id="score-text"></p>
-      <p>Meilleur score : <span id="best-score-end">0</span></p>
-      <div id="statsContainer"></div>
-      <div id="recap-questions" style="display: none;">
-      </div>
-      <button id="restart-btn">Recommencer</button>
+        <h2>Résultat final</h2>
+        <p id="score-text"></p>
+        <p>Meilleur score : <span id="best-score-end">0</span></p>
+        <div id="statsContainer"></div>
+        <div id="recap-questions" style="display: none;">
+        </div>
+        <button id="restart-btn">Recommencer</button>
     </div>
 
     <script type="module" src="../assets/js/quiz.js"></script>
-    
-
-  </body>
+    <script src="../assets/js/darkMode.js"></script>
+</body>
 </html>
