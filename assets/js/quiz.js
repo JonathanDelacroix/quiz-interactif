@@ -90,7 +90,6 @@ function showQuestion() {
   }
 
   const q = window.shuffledQuestions[currentQuestionIndex]; 
-  const correctAnswerIndex = q.correct; 
   const answers = q.answers;
 
   const answersWithIndex = answers.map((answer, index) => ({ index, answer }));
