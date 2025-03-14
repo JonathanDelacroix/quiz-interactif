@@ -6,6 +6,7 @@ export const questions = [
         correct: 1,
         timeLimit: 10,
         level: 1,
+        theme: "Géographie"
     },
     {
         text: "Combien font 2 + 3 ?",
@@ -13,6 +14,7 @@ export const questions = [
         correct: 2,
         timeLimit: 5,
         level: 1,
+        theme: "Mathématiques"
     },
     {
         text: "Quel est le plus grand océan du monde ?",
@@ -20,6 +22,7 @@ export const questions = [
         correct: 2,
         timeLimit: 10,
         level: 1,
+        theme: "Géographie"
     },
     {
         text: "Combien y a-t-il de continents sur Terre ?",
@@ -27,6 +30,7 @@ export const questions = [
         correct: 3,
         timeLimit: 7,
         level: 1,
+        theme: "Géographie"
     },
     {
         text: "Quelle planète est surnommée la planète rouge ?",
@@ -34,6 +38,7 @@ export const questions = [
         correct: 1,
         timeLimit: 8,
         level: 1,
+        theme: "Astronomie"
     },
     {
         text: "Quelle est la couleur du soleil ?",
@@ -41,6 +46,7 @@ export const questions = [
         correct: 2,
         timeLimit: 6,
         level: 1,
+        theme: "Science"
     },
     {
         text: "Quel animal est connu pour être le roi de la jungle ?",
@@ -48,6 +54,7 @@ export const questions = [
         correct: 0,
         timeLimit: 5,
         level: 1,
+        theme: "Animaux"
     },
     {
         text: "Combien y a-t-il de côtés dans un triangle ?",
@@ -55,6 +62,7 @@ export const questions = [
         correct: 1,
         timeLimit: 6,
         level: 1,
+        theme: "Mathématiques"
     },
     {
         text: "Quelle est la monnaie du Japon ?",
@@ -62,6 +70,7 @@ export const questions = [
         correct: 3,
         timeLimit: 7,
         level: 1,
+        theme: "Économie"
     },
     {
         text: "Quel est le plus grand mammifère terrestre ?",
@@ -69,6 +78,7 @@ export const questions = [
         correct: 0,
         timeLimit: 8,
         level: 1,
+        theme: "Animaux"
     },
 
     // Niveau 2 (Intermédiaire)
@@ -78,6 +88,7 @@ export const questions = [
         correct: 1,
         timeLimit: 12,
         level: 2,
+        theme: "Géographie"
     },
     {
         text: "En quelle année l'homme a-t-il marché sur la Lune ?",
@@ -85,6 +96,7 @@ export const questions = [
         correct: 1,
         timeLimit: 12,
         level: 2,
+        theme: "Histoire"
     },
     {
         text: "Quel pays a remporté la Coupe du monde de football en 2018 ?",
@@ -92,6 +104,7 @@ export const questions = [
         correct: 2,
         timeLimit: 10,
         level: 2,
+        theme: "Sport"
     },
     {
         text: "Quel est l’élément chimique dont le symbole est 'O' ?",
@@ -99,6 +112,7 @@ export const questions = [
         correct: 0,
         timeLimit: 8,
         level: 2,
+        theme: "Chimie"
     },
     {
         text: "Quelle est la racine carrée de 144 ?",
@@ -106,6 +120,7 @@ export const questions = [
         correct: 2,
         timeLimit: 10,
         level: 2,
+        theme: "Mathématiques"
     },
     {
         text: "Quel scientifique a développé la théorie de la relativité ?",
@@ -113,6 +128,7 @@ export const questions = [
         correct: 1,
         timeLimit: 10,
         level: 2,
+        theme: "Science"
     },
     {
         text: "Qui a peint la Joconde ?",
@@ -120,6 +136,7 @@ export const questions = [
         correct: 1,
         timeLimit: 10,
         level: 2,
+        theme: "Art"
     },
     {
         text: "Quel est le plus petit pays du monde ?",
@@ -127,20 +144,7 @@ export const questions = [
         correct: 3,
         timeLimit: 10,
         level: 2,
-    },
-    {
-        text: "Quel est le symbole chimique du fer ?",
-        answers: ["Fe", "Ir", "F", "I"],
-        correct: 0,
-        timeLimit: 8,
-        level: 2,
-    },
-    {
-        text: "Dans quel pays trouve-t-on le Taj Mahal ?",
-        answers: ["Inde", "Pakistan", "Iran", "Afghanistan"],
-        correct: 0,
-        timeLimit: 9,
-        level: 2,
+        theme: "Géographie"
     },
 
     // Niveau 3 (Difficile)
@@ -150,6 +154,7 @@ export const questions = [
         correct: 0,
         timeLimit: 15,
         level: 3,
+        theme: "Mathématiques"
     },
     {
         text: "Qui a écrit 'Les Misérables' ?",
@@ -157,6 +162,7 @@ export const questions = [
         correct: 1,
         timeLimit: 12,
         level: 3,
+        theme: "Littérature"
     },
     {
         text: "Quel est le deuxième plus grand désert du monde après l'Antarctique ?",
@@ -164,6 +170,7 @@ export const questions = [
         correct: 3,
         timeLimit: 12,
         level: 3,
+        theme: "Géographie"
     },
     {
         text: "En quelle année a eu lieu la chute de Constantinople ?",
@@ -171,6 +178,7 @@ export const questions = [
         correct: 1,
         timeLimit: 15,
         level: 3,
+        theme: "Histoire"
     },
     {
         text: "Quel est l'organe le plus grand du corps humain ?",
@@ -178,6 +186,7 @@ export const questions = [
         correct: 2,
         timeLimit: 10,
         level: 3,
+        theme: "Biologie"
     },
     {
         text: "Qui a inventé l’imprimerie ?",
@@ -185,27 +194,7 @@ export const questions = [
         correct: 1,
         timeLimit: 12,
         level: 3,
-    },
-    {
-        text: "Quel est le premier élément du tableau périodique ?",
-        answers: ["Hydrogène", "Hélium", "Carbone", "Oxygène"],
-        correct: 0,
-        timeLimit: 10,
-        level: 3,
-    },
-    {
-        text: "Quel est le plus long règne d'un monarque en France ?",
-        answers: ["Louis XIV", "François Ier", "Henri IV", "Napoléon"],
-        correct: 0,
-        timeLimit: 15,
-        level: 3,
-    },
-    {
-        text: "Qui a formulé la loi de la gravitation universelle ?",
-        answers: ["Galilée", "Einstein", "Newton", "Kepler"],
-        correct: 2,
-        timeLimit: 12,
-        level: 3,
+        theme: "Histoire"
     },
     {
         text: "Dans quel pays se trouve la ville de Machu Picchu ?",
@@ -213,5 +202,204 @@ export const questions = [
         correct: 2,
         timeLimit: 10,
         level: 3,
+        theme: "Géographie"
+    },
+
+     // 📌 Niveau 1 (Facile)
+     {
+        text: "Quel est le plus petit continent du monde ?",
+        answers: ["Europe", "Asie", "Australie", "Afrique"],
+        correct: 2,
+        timeLimit: 10,
+        level: 1,
+        theme: "Géographie"
+    },
+    {
+        text: "Quel est le chiffre de la malchance dans certaines cultures ?",
+        answers: ["7", "13", "9", "3"],
+        correct: 1,
+        timeLimit: 5,
+        level: 1,
+        theme: "Culture Générale"
+    },
+    {
+        text: "Que boivent généralement les vaches pour se nourrir ?",
+        answers: ["Eau", "Lait", "Jus", "Soda"],
+        correct: 0,
+        timeLimit: 5,
+        level: 1,
+        theme: "Animaux"
+    },
+    {
+        text: "Quel fruit est connu pour éloigner le médecin lorsqu'on en mange un par jour ?",
+        answers: ["Banane", "Orange", "Pomme", "Raisin"],
+        correct: 2,
+        timeLimit: 6,
+        level: 1,
+        theme: "Alimentation"
+    },
+    {
+        text: "Combien de pattes a une araignée ?",
+        answers: ["6", "8", "10", "12"],
+        correct: 1,
+        timeLimit: 6,
+        level: 1,
+        theme: "Animaux"
+    },
+
+    // 📌 Niveau 2 (Intermédiaire)
+    {
+        text: "Qui est l’auteur du roman '1984' ?",
+        answers: ["George Orwell", "Aldous Huxley", "Victor Hugo", "Fiodor Dostoïevski"],
+        correct: 0,
+        timeLimit: 12,
+        level: 2,
+        theme: "Littérature"
+    },
+    {
+        text: "Quelle planète est la plus proche du Soleil ?",
+        answers: ["Venus", "Mars", "Mercure", "Jupiter"],
+        correct: 2,
+        timeLimit: 10,
+        level: 2,
+        theme: "Astronomie"
+    },
+    {
+        text: "Quel instrument de musique possède des touches blanches et noires ?",
+        answers: ["Guitare", "Piano", "Violon", "Flûte"],
+        correct: 1,
+        timeLimit: 8,
+        level: 2,
+        theme: "Musique"
+    },
+    {
+        text: "Quel pays est le plus peuplé du monde ?",
+        answers: ["Inde", "Chine", "États-Unis", "Indonésie"],
+        correct: 1,
+        timeLimit: 10,
+        level: 2,
+        theme: "Géographie"
+    },
+    {
+        text: "Quel est l’élément chimique dont le symbole est 'Na' ?",
+        answers: ["Nickel", "Azote", "Sodium", "Neon"],
+        correct: 2,
+        timeLimit: 8,
+        level: 2,
+        theme: "Chimie"
+    },
+    {
+        text: "Qui a écrit 'Roméo et Juliette' ?",
+        answers: ["Molière", "Victor Hugo", "William Shakespeare", "Alexandre Dumas"],
+        correct: 2,
+        timeLimit: 10,
+        level: 2,
+        theme: "Littérature"
+    },
+    {
+        text: "Quel est le plus long fleuve d'Afrique ?",
+        answers: ["Nil", "Congo", "Niger", "Zambèze"],
+        correct: 0,
+        timeLimit: 10,
+        level: 2,
+        theme: "Géographie"
+    },
+    {
+        text: "Combien de côtés possède un hexagone ?",
+        answers: ["4", "5", "6", "7"],
+        correct: 2,
+        timeLimit: 8,
+        level: 2,
+        theme: "Mathématiques"
+    },
+    {
+        text: "Quel gaz respirons-nous principalement ?",
+        answers: ["Oxygène", "Azote", "Dioxyde de carbone", "Hélium"],
+        correct: 1,
+        timeLimit: 6,
+        level: 2,
+        theme: "Science"
+    },
+
+    // 📌 Niveau 3 (Difficile)
+    {
+        text: "Quel scientifique a découvert la radioactivité ?",
+        answers: ["Isaac Newton", "Marie Curie", "Albert Einstein", "Dmitri Mendeleïev"],
+        correct: 1,
+        timeLimit: 15,
+        level: 3,
+        theme: "Science"
+    },
+    {
+        text: "Quel est le plus haut sommet du monde ?",
+        answers: ["Mont Blanc", "Mont Everest", "Kilimandjaro", "K2"],
+        correct: 1,
+        timeLimit: 15,
+        level: 3,
+        theme: "Géographie"
+    },
+    {
+        text: "En quelle année a eu lieu la Révolution française ?",
+        answers: ["1750", "1776", "1789", "1804"],
+        correct: 2,
+        timeLimit: 15,
+        level: 3,
+        theme: "Histoire"
+    },
+    {
+        text: "Dans quel pays trouve-t-on la grande muraille de Chine ?",
+        answers: ["Chine", "Mongolie", "Japon", "Inde"],
+        correct: 0,
+        timeLimit: 12,
+        level: 3,
+        theme: "Géographie"
+    },
+    {
+        text: "Quel est le plus grand désert du monde ?",
+        answers: ["Sahara", "Gobi", "Antarctique", "Kalahari"],
+        correct: 2,
+        timeLimit: 12,
+        level: 3,
+        theme: "Géographie"
+    },
+    {
+        text: "Qui a écrit 'Le Petit Prince' ?",
+        answers: ["Jules Verne", "Victor Hugo", "Antoine de Saint-Exupéry", "Marcel Proust"],
+        correct: 2,
+        timeLimit: 12,
+        level: 3,
+        theme: "Littérature"
+    },
+    {
+        text: "Quel est le symbole chimique du plomb ?",
+        answers: ["Pb", "Pl", "Ld", "P"],
+        correct: 0,
+        timeLimit: 10,
+        level: 3,
+        theme: "Chimie"
+    },
+    {
+        text: "Quel est le pays ayant remporté le plus de Coupes du Monde de football ?",
+        answers: ["Brésil", "Allemagne", "Italie", "Argentine"],
+        correct: 0,
+        timeLimit: 10,
+        level: 3,
+        theme: "Sport"
+    },
+    {
+        text: "Qui a inventé la machine à vapeur ?",
+        answers: ["James Watt", "Nikola Tesla", "Thomas Edison", "Benjamin Franklin"],
+        correct: 0,
+        timeLimit: 15,
+        level: 3,
+        theme: "Science"
+    },
+    {
+        text: "Dans quelle ville se trouve le Colisée ?",
+        answers: ["Athènes", "Rome", "Paris", "Londres"],
+        correct: 1,
+        timeLimit: 10,
+        level: 3,
+        theme: "Histoire"
     }
 ];

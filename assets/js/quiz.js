@@ -26,6 +26,12 @@ export { questions, score};
 
 console.log("Quiz JS loaded...");
 
+<<<<<<< HEAD
+=======
+
+let currentQuestionStartTime = 0;
+export let timesPerQuestion = [];
+>>>>>>> develop
 let currentQuestionIndex = 0;
 let score = 0;
 let bestScore = loadFromLocalStorage("bestScore", 0);
@@ -85,6 +91,8 @@ function shuffleArray(array) {
 function showQuestion() {
   clearInterval(timerId);
 
+  currentQuestionStartTime = Date.now();
+
   if (!window.shuffledQuestions) {
     const level1 = shuffleArray(questions.filter(q => q.level === 1));
     const level2 = shuffleArray(questions.filter(q => q.level === 2));
@@ -116,6 +124,10 @@ function showQuestion() {
     q.timeLimit,
     (timeLeft) => setText(timeLeftSpan, timeLeft),
     () => {
+
+       // Lorsque le temps est écoulé, enregistrer le temps écoulé
+       const timeTaken = (Date.now() - currentQuestionStartTime) / 1000;
+       timesPerQuestion.push(timeTaken);
       lockAnswers(answersDiv);
       nextBtn.classList.remove("hidden");
     }
@@ -124,6 +136,13 @@ function showQuestion() {
 
 function selectAnswer(index, q, btn) {
   clearInterval(timerId);
+
+
+ // Calcul du temps passé sur la question
+ const timeTaken = (Date.now() - currentQuestionStartTime) / 1000;
+ timesPerQuestion.push(timeTaken);
+
+  
   if (index === q.correct) {
     score++;
     btn.classList.add("correct");
