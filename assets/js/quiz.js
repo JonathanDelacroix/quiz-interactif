@@ -70,8 +70,7 @@ function startQuiz() {
   score = 0;
   questionsfilled = []
 
-  setText(totalQuestionsSpan, questions.length);
-
+  setText(totalQuestionsSpan, Object.keys(questions).length);
   showQuestion();
 }
 
@@ -92,12 +91,13 @@ function showQuestion() {
     const level1 = shuffleArray(questions.filter(q => q.level === 1));
     const level2 = shuffleArray(questions.filter(q => q.level === 2));
     const level3 = shuffleArray(questions.filter(q => q.level === 3));
+
     window.shuffledQuestions = [...level1, ...level2, ...level3];
   }
 
   const q = window.shuffledQuestions[currentQuestionIndex]; 
-  const answers = q.answers;
 
+  const answers = q.answers;
   const answersWithIndex = answers.map((answer, index) => ({ index, answer }));
   const shuffledAnswersWithIndex = shuffleArray([...answersWithIndex]);
 
