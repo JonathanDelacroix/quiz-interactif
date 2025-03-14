@@ -35,7 +35,6 @@ let timerId = null;
 let questionsfilled = [];
 let answersgiven = [];
 
-// DOM Elements
 const introScreen = getElement("#intro-screen");
 const questionScreen = getElement("#question-screen");
 const resultScreen = getElement("#result-screen");
@@ -77,26 +76,37 @@ function startQuiz() {
 }
 
 function shuffleArray(array) {
-  return array.sort(() => Math.random() - 0.5);
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }
 
 function showQuestion() {
   clearInterval(timerId);
 
-  
   if (!window.shuffledQuestions) {
-    window.shuffledQuestions = shuffleArray([...questions]);
+    const level1 = shuffleArray(questions.filter(q => q.level === 1));
+    const level2 = shuffleArray(questions.filter(q => q.level === 2));
+    const level3 = shuffleArray(questions.filter(q => q.level === 3));
+    window.shuffledQuestions = [...level1, ...level2, ...level3];
   }
 
   const q = window.shuffledQuestions[currentQuestionIndex]; 
+  const answers = q.answers;
+
+  const answersWithIndex = answers.map((answer, index) => ({ index, answer }));
+  const shuffledAnswersWithIndex = shuffleArray([...answersWithIndex]);
+
   setText(questionText, q.text);
   setText(currentQuestionIndexSpan, currentQuestionIndex + 1);
 
   answersDiv.innerHTML = "";
-  
-  
-  q.answers.forEach((answer, index) => {
-    const btn = createAnswerButton(answer, () => selectAnswer(index, btn));
+
+  shuffledAnswersWithIndex.forEach(({ index, answer }) => {
+    const btn = createAnswerButton(answer, () => selectAnswer(index, q, btn));
+    btn.dataset.index = index;
     answersDiv.appendChild(btn);
   });
 
@@ -113,11 +123,8 @@ function showQuestion() {
   );
 }
 
-
-function selectAnswer(index, btn) {
+function selectAnswer(index, q, btn) {
   clearInterval(timerId);
-
-  const q = questions[currentQuestionIndex];
   if (index === q.correct) {
     score++;
     btn.classList.add("correct");
