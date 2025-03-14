@@ -26,12 +26,9 @@ export { questions, score};
 
 console.log("Quiz JS loaded...");
 
-<<<<<<< HEAD
-=======
 
 let currentQuestionStartTime = 0;
 export let timesPerQuestion = [];
->>>>>>> develop
 let currentQuestionIndex = 0;
 let score = 0;
 let bestScore = loadFromLocalStorage("bestScore", 0);
