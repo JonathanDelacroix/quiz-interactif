@@ -20,7 +20,6 @@ import {
 
 import { questions } from "./Questions.js";
 import { generateStatistics } from "./stats.js";
-import { changeLanguage, savedLanguage } from "./language.js";
 
 export { questions, score};
 
@@ -57,7 +56,6 @@ const totalQuestionsSpan = getElement("#total-questions");
 const recapsection = getElement("#recap-questions")
 
 // Init
-changeLanguage(savedLanguage);
 startBtn.addEventListener("click", startQuiz);
 nextBtn.addEventListener("click", nextQuestion);
 restartBtn.addEventListener("click", restartQuiz);
@@ -166,7 +164,7 @@ function endQuiz() {
   hideElement(questionScreen);
   showElement(resultScreen);
 
-  updateScoreDisplay(scoreText, score, questions.length, savedLanguage);
+  updateScoreDisplay(scoreText, score, questions.length);
 
   if (score > bestScore) {
     bestScore = score;
