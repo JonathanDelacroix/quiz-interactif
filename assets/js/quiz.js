@@ -138,7 +138,7 @@ function selectAnswer(index, q, btn) {
  const timeTaken = (Date.now() - currentQuestionStartTime) / 1000;
  timesPerQuestion.push(timeTaken);
 
-  const q = questions[currentQuestionIndex];
+  
   if (index === q.correct) {
     score++;
     btn.classList.add("correct");
