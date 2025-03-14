@@ -7,13 +7,19 @@
   <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body>
+  
   <!-- Écran d'introduction -->
   <div id="intro-screen">
     <h1>Mode Contre la Montre</h1>
     <p>Répondez à un maximum de questions en 20 secondes !</p>
     <button id="start-btn">Commencer</button>
   </div>
-
+  <div class="switch-container">
+    <input type="checkbox" id="switch" class="switch-input">
+    <label for="switch" class="switch-label">
+        <span class="switch-handle"></span>
+    </label>
+  </div>
   <!-- Écran des questions -->
   <div id="question-screen" class="hidden">
     <div id="header">
@@ -36,5 +42,6 @@
   </div>
 
   <script type="module" src="../assets/js/quizMontre.js"></script>
+  <script src="../assets/js/darkMode.js"></script>
 </body>
 </html>
