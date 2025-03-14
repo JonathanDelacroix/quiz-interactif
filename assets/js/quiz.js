@@ -69,7 +69,8 @@ function startQuiz() {
   score = 0;
   questionsfilled = []
 
-  setText(totalQuestionsSpan, Object.keys(questions).length);
+  setText(totalQuestionsSpan, questions.length);
+
   showQuestion();
 }
 
@@ -85,39 +86,34 @@ function showQuestion() {
   clearInterval(timerId);
 
   if (!window.shuffledQuestions) {
-    const allQuestions = Object.values(questions);
-    const level1 = shuffleArray(allQuestions.filter(q => q.level === 1));
-    const level2 = shuffleArray(allQuestions.filter(q => q.level === 2));
-    const level3 = shuffleArray(allQuestions.filter(q => q.level === 3));
-
+    const level1 = shuffleArray(questions.filter(q => q.level === 1));
+    const level2 = shuffleArray(questions.filter(q => q.level === 2));
+    const level3 = shuffleArray(questions.filter(q => q.level === 3));
     window.shuffledQuestions = [...level1, ...level2, ...level3];
   }
 
-  prompt(JSON.stringify(window.shuffledQuestions, null, 2));
   const q = window.shuffledQuestions[currentQuestionIndex]; 
+  const answers = q.answers;
 
-  const translatedQuestion = q[savedLanguage];
-
-  const answers = translatedQuestion.answers;
   const answersWithIndex = answers.map((answer, index) => ({ index, answer }));
   const shuffledAnswersWithIndex = shuffleArray([...answersWithIndex]);
 
-  setText(questionText, translatedQuestion.text);
+  setText(questionText, q.text);
   setText(currentQuestionIndexSpan, currentQuestionIndex + 1);
 
   answersDiv.innerHTML = "";
 
   shuffledAnswersWithIndex.forEach(({ index, answer }) => {
-    const btn = createAnswerButton(answer, () => selectAnswer(index, translatedQuestion, btn));
+    const btn = createAnswerButton(answer, () => selectAnswer(index, q, btn));
     btn.dataset.index = index;
     answersDiv.appendChild(btn);
   });
 
   nextBtn.classList.add("hidden");
 
-  timeLeftSpan.textContent = translatedQuestion.timeLimit;
+  timeLeftSpan.textContent = q.timeLimit;
   timerId = startTimer(
-    translatedQuestion.timeLimit,
+    q.timeLimit,
     (timeLeft) => setText(timeLeftSpan, timeLeft),
     () => {
       lockAnswers(answersDiv);
