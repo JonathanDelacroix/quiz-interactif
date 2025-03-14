@@ -19,10 +19,15 @@ import {
   } from "./recap.js";
 
   import { questions } from "./Questions.js";
-//import { generateStatistics } from "./statsTheme.js";
+import { generateStatistics } from "./statsTheme.js";
   
   console.log("Quiz Theme JS loaded...");
   
+
+  export let timesPerQuestion = [];
+  let currentQuestionStartTime = 0;
+  
+
   let currentQuestionIndex = 0;
   export let score = 0;
   let bestScore = loadFromLocalStorage("bestScoreTheme", 0);
@@ -67,20 +72,19 @@ import {
     return Array.from(themes).sort();
   }
   
-  // Créer les boutons de thème
+
   function createThemeButtons() {
     const themes = getUniqueThemes();
-    
-    // Vider le conteneur de boutons
+
     themeButtons.innerHTML = "";
     
-    // Créer un bouton pour chaque thème
+  
     themes.forEach(theme => {
       const button = document.createElement("button");
       button.classList.add("theme-btn");
       button.textContent = theme;
       
-      // Ajouter un écouteur d'événement pour démarrer le quiz avec ce thème
+      
       button.addEventListener("click", () => {
         startQuizWithTheme(theme);
       });
@@ -88,7 +92,7 @@ import {
       themeButtons.appendChild(button);
     });
     
-    // Ajouter un bouton de retour
+
     const backButton = document.createElement("button");
     backButton.classList.add("back-btn");
     backButton.textContent = "Retour";
@@ -115,7 +119,7 @@ import {
     answersgiven = [];
     currentTheme = theme;
   
-    // Filtrer les questions par thème et en prendre 10 aléatoires
+
     const filteredQuestions = questions.filter(q => q.theme === theme);
     themeQuestions = shuffleArray([...filteredQuestions]).slice(0, 10);
   
@@ -125,6 +129,10 @@ import {
   
   function showQuestion() {
     clearInterval(timerId);
+
+
+
+    currentQuestionStartTime = Date.now();
   
     const q = themeQuestions[currentQuestionIndex]; 
     setText(questionText, q.text);
@@ -144,6 +152,9 @@ import {
       q.timeLimit,
       (timeLeft) => setText(timeLeftSpan, timeLeft),
       () => {
+
+        const timeTaken = (Date.now() - currentQuestionStartTime) / 1000;
+        timesPerQuestion.push(timeTaken);
         lockAnswers(answersDiv);
         nextBtn.classList.remove("hidden");
       }
@@ -153,6 +164,11 @@ import {
   function selectAnswer(index, btn) {
     clearInterval(timerId);
   
+
+    const timeTaken = (Date.now() - currentQuestionStartTime) / 1000;
+    timesPerQuestion.push(timeTaken);
+
+
     const q = themeQuestions[currentQuestionIndex];
     if (index === q.correct) {
       score++;
@@ -182,7 +198,7 @@ import {
   
     updateScoreDisplay(scoreText, score, themeQuestions.length);
   
-    // Stocker le meilleur score par thème
+   
     const themeScoreKey = `bestScore_${currentTheme}`;
     let themeBestScore = loadFromLocalStorage(themeScoreKey, 0);
     
@@ -195,7 +211,7 @@ import {
     
     let recap = getAnswerQuestion(questionsfilled);
     startrecap(recap, recapsection, answersgiven);
-    generateStatistics();
+    generateStatistics(themeQuestions.length);
   }
   
   function restartQuiz() {
@@ -207,8 +223,7 @@ import {
   
     recapsection.innerHTML = "";
     recapsection.style.display = "none";
-    
-    // Recréer les boutons de thème
+
     createThemeButtons();
   }
   
@@ -245,7 +260,7 @@ import {
     });
   }
   
-  // Exécuter l'initialisation quand le DOM est chargé
+
   document.addEventListener("DOMContentLoaded", () => {
     createThemeButtons();
   });
